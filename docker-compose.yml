@@ -1,0 +1,25 @@
+version: '4.25.1'
+
+services:
+  server:
+    build:
+      context: ./server
+      target: server-production
+    ports:
+      - 4000:4000
+
+  client:
+    build:
+      context: ./client
+      target: client-production
+    ports:
+      - 8080:80
+
+  nginx:
+    build:
+      context: ./client
+      # dockerfile: Dockerfile-nginx
+    ports:
+      - 80:80
+    depends_on:
+      - client
